@@ -1,0 +1,22 @@
+test_that("AHPWeight works", {
+  expect_equal(2 * 2, 4)
+  ZB	<-c(		"SYZ"	,	"YFYL"	,"RM"	,	"LHYY"	,	"LC"	,	"TSRQ"	,	"GYSD"	,	"BLFY"	,	"XKQJ"	,	"YYJH")
+  SYZ	<-c(		1	,	3	,	0.5	,	0.5	,	3	,	4	,	6	,	8	,	9	,	2	)
+  YFYL	<-c(		0.3333333	,	1	,	0.5	,	0.3333333	,	0.5	,	2	,	3	,	4	,	5	,	6	)
+  RM	<-c(		3	,	2	,	1	,	3	,	2	,	3	,	4	,	5	,	6	,	7	)
+  LHYY	<-c(		2	,	3	,	0.3333333	,	1	,	2	,	4	,	2	,	1	,	5	,	6	)
+  LC	<-c(		0.3333333	,	2	,	0.5	,	0.5	,	1	,	4	,	5	,	6	,	7	,	8	)
+  TSRQ	<-c(		0.25	,	0.5	,	0.333333333	,	0.25	,	0.25	,	1	,	4	,	3	,	6	,	2	)
+  GYSD	<-c(		0.166666667	,	0.333333333	,	0.25	,	0.5	,	0.2	,	0.25	,	1	,	4	,	1	,	7	)
+  BLFY	<-c(		0.125	,	0.25	,	0.2	,	1	,	0.166666667	,	0.333333333	,	0.25	,	1	,	4	,	3	)
+  XKQJ	<-c(		0.111111111	,	0.2	,	0.166666667	,	0.2	,	0.142857143	,	0.166666667	,	1	,	0.25	,	1	,	4	)
+  YYJH	<-c(		0.5	,	0.166666667	,	0.142857143	,	0.166666667	,	0.125	,	0.5	,	0.142857143	,	0.333333333	,	0.25	,	1	)
+  MatixData<-data.frame( ZB, SYZ	,	YFYL	,	RM	,	LHYY	,	LC	,	TSRQ	,	GYSD	,	BLFY	,	XKQJ	,	YYJH)
+
+  weightResult<-c(0.03038034	,	0.052961	,	0.02376282	,	0.03596102	,	0.03541093	,	0.07882356	,	0.11357496	,	0.14199933	,	0.21350963	,	0.27361641)
+  names(weightResult)<-names(MatixData)[2:11]
+  ResultCheck<-c("0.233713071987475","0.156854410729849","CR>0.1,Consistency check failed")
+  names(ResultCheck)<-c("CI","CR","CheckOutput")
+  result<-list(weightResult,ResultCheck)
+  expect_identical(round(AHPWeight(MatixData)$weightResult,4),round(weightResult,4))
+})
